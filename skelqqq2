@@ -1,0 +1,537 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--[[
+
+		Gui2Lua™
+		10zOfficial
+		Version 1.0.0
+
+]]
+
+
+-- Instances
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageLabel = Instance.new("ImageLabel")
+local UICorner = Instance.new("UICorner")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local UICorner_3 = Instance.new("UICorner")
+local TextButton_2 = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local TextButton_3 = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local TextButton_4 = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local TextButton_5 = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local TextButton_6 = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+local TextButton_7 = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local TextButton_8 = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextButton_9 = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local TextButton_10 = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local TextButton_11 = Instance.new("TextButton")
+local UICorner_13 = Instance.new("UICorner")
+
+-- Properties
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
+
+ImageLabel.Parent = ScreenGui
+ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+ImageLabel.BorderColor3 = Color3.new(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.324840754, 0, 0.187786266, 0)
+ImageLabel.Size = UDim2.new(0, 439, 0, 409)
+ImageLabel.Image = "rbxassetid://102923004202436"
+
+UICorner.Parent = ImageLabel
+
+Frame.Parent = ImageLabel
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+Frame.BackgroundTransparency = 0.5
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Size = UDim2.new(0, 439, 0, 409)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.132118449, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 322, 0, 41)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Skeletons gui v1"
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14
+TextLabel.TextWrapped = true
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Size = UDim2.new(0, 91, 0, 58)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Theme"
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.TextScaled = true
+TextButton.TextSize = 14
+TextButton.TextWrapped = true
+
+UICorner_2.Parent = TextButton
+
+UICorner_3.Parent = Frame
+
+TextButton_2.Parent = Frame
+TextButton_2.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_2.BackgroundTransparency = 0.5
+TextButton_2.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_2.BorderSizePixel = 0
+TextButton_2.Position = UDim2.new(0, 0, 0.239608809, 0)
+TextButton_2.Size = UDim2.new(0, 129, 0, 62)
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.Text = "Skeletonbox 1"
+TextButton_2.TextColor3 = Color3.new(1, 1, 1)
+TextButton_2.TextScaled = true
+TextButton_2.TextSize = 14
+TextButton_2.TextWrapped = true
+
+UICorner_4.Parent = TextButton_2
+
+TextButton_3.Parent = Frame
+TextButton_3.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_3.BackgroundTransparency = 0.5
+TextButton_3.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_3.BorderSizePixel = 0
+TextButton_3.Position = UDim2.new(0.330296129, 0, 0.239608809, 0)
+TextButton_3.Size = UDim2.new(0, 129, 0, 62)
+TextButton_3.Font = Enum.Font.SourceSans
+TextButton_3.Text = "Skeletonbox 2"
+TextButton_3.TextColor3 = Color3.new(1, 1, 1)
+TextButton_3.TextScaled = true
+TextButton_3.TextSize = 14
+TextButton_3.TextWrapped = true
+
+UICorner_5.Parent = TextButton_3
+
+TextButton_4.Parent = Frame
+TextButton_4.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_4.BackgroundTransparency = 0.5
+TextButton_4.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_4.BorderSizePixel = 0
+TextButton_4.Position = UDim2.new(0, 0, 0.440097809, 0)
+TextButton_4.Size = UDim2.new(0, 129, 0, 62)
+TextButton_4.Font = Enum.Font.SourceSans
+TextButton_4.Text = "Skeleton spam 1"
+TextButton_4.TextColor3 = Color3.new(1, 1, 1)
+TextButton_4.TextScaled = true
+TextButton_4.TextSize = 14
+TextButton_4.TextWrapped = true
+
+UICorner_6.Parent = TextButton_4
+
+TextButton_5.Parent = Frame
+TextButton_5.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_5.BackgroundTransparency = 0.5
+TextButton_5.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_5.BorderSizePixel = 0
+TextButton_5.Position = UDim2.new(0.330296129, 0, 0.440097809, 0)
+TextButton_5.Size = UDim2.new(0, 129, 0, 62)
+TextButton_5.Font = Enum.Font.SourceSans
+TextButton_5.Text = "Skeleton spam 2"
+TextButton_5.TextColor3 = Color3.new(1, 1, 1)
+TextButton_5.TextScaled = true
+TextButton_5.TextSize = 14
+TextButton_5.TextWrapped = true
+
+UICorner_7.Parent = TextButton_5
+
+TextButton_6.Parent = Frame
+TextButton_6.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_6.BackgroundTransparency = 0.5
+TextButton_6.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_6.BorderSizePixel = 0
+TextButton_6.Position = UDim2.new(0, 0, 0.638141811, 0)
+TextButton_6.Size = UDim2.new(0, 129, 0, 62)
+TextButton_6.Font = Enum.Font.SourceSans
+TextButton_6.Text = "Skeleton particles 1"
+TextButton_6.TextColor3 = Color3.new(1, 1, 1)
+TextButton_6.TextScaled = true
+TextButton_6.TextSize = 14
+TextButton_6.TextWrapped = true
+
+UICorner_8.Parent = TextButton_6
+
+TextButton_7.Parent = Frame
+TextButton_7.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_7.BackgroundTransparency = 0.5
+TextButton_7.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_7.BorderSizePixel = 0
+TextButton_7.Position = UDim2.new(0.330296129, 0, 0.638141811, 0)
+TextButton_7.Size = UDim2.new(0, 129, 0, 62)
+TextButton_7.Font = Enum.Font.SourceSans
+TextButton_7.Text = "Skeleton particles 2"
+TextButton_7.TextColor3 = Color3.new(1, 1, 1)
+TextButton_7.TextScaled = true
+TextButton_7.TextSize = 14
+TextButton_7.TextWrapped = true
+
+UICorner_9.Parent = TextButton_7
+
+TextButton_8.Parent = Frame
+TextButton_8.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_8.BackgroundTransparency = 0.5
+TextButton_8.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_8.BorderSizePixel = 0
+TextButton_8.Position = UDim2.new(-0.248074964, 0, 0.120684527, 0)
+TextButton_8.Rotation = -50
+TextButton_8.Size = UDim2.new(0, 108, 0, 50)
+TextButton_8.Font = Enum.Font.SourceSans
+TextButton_8.Text = "Rain skeletons"
+TextButton_8.TextColor3 = Color3.new(1, 1, 1)
+TextButton_8.TextScaled = true
+TextButton_8.TextSize = 14
+TextButton_8.TextWrapped = true
+
+UICorner_10.Parent = TextButton_8
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.BorderColor3 = Color3.new(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.403189063, 0, 0.933985353, 0)
+TextLabel_2.Size = UDim2.new(0, 304, 0, 27)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "made only by sus"
+TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14
+TextLabel_2.TextWrapped = true
+
+TextButton_9.Parent = Frame
+TextButton_9.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_9.BackgroundTransparency = 0.5
+TextButton_9.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_9.BorderSizePixel = 0
+TextButton_9.Position = UDim2.new(0.660592258, 0, 0.242053792, 0)
+TextButton_9.Size = UDim2.new(0, 129, 0, 62)
+TextButton_9.Font = Enum.Font.SourceSans
+TextButton_9.Text = "Skeleton hint 1"
+TextButton_9.TextColor3 = Color3.new(1, 1, 1)
+TextButton_9.TextScaled = true
+TextButton_9.TextSize = 14
+TextButton_9.TextWrapped = true
+
+UICorner_11.Parent = TextButton_9
+
+TextButton_10.Parent = Frame
+TextButton_10.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_10.BackgroundTransparency = 0.5
+TextButton_10.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_10.BorderSizePixel = 0
+TextButton_10.Position = UDim2.new(0.660592258, 0, 0.440097809, 0)
+TextButton_10.Size = UDim2.new(0, 129, 0, 62)
+TextButton_10.Font = Enum.Font.SourceSans
+TextButton_10.Text = "Skeleton hint 2"
+TextButton_10.TextColor3 = Color3.new(1, 1, 1)
+TextButton_10.TextScaled = true
+TextButton_10.TextSize = 14
+TextButton_10.TextWrapped = true
+
+UICorner_12.Parent = TextButton_10
+
+TextButton_11.Parent = Frame
+TextButton_11.BackgroundColor3 = Color3.new(0.352941, 0.352941, 0.352941)
+TextButton_11.BackgroundTransparency = 0.5
+TextButton_11.BorderColor3 = Color3.new(0, 0, 0)
+TextButton_11.BorderSizePixel = 0
+TextButton_11.Position = UDim2.new(0.660592258, 0, 0.638141811, 0)
+TextButton_11.Size = UDim2.new(0, 129, 0, 62)
+TextButton_11.Font = Enum.Font.SourceSans
+TextButton_11.Text = "Skeleton hint 3"
+TextButton_11.TextColor3 = Color3.new(1, 1, 1)
+TextButton_11.TextScaled = true
+TextButton_11.TextSize = 14
+TextButton_11.TextWrapped = true
+
+UICorner_13.Parent = TextButton_11
+
+-- Scripts
+
+local function SOQS_fake_script() -- TextButton.Script 
+	local script = Instance.new('Script', TextButton)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		local a = Instance.new("Sound", workspace)
+		a.SoundId = "rbxassetid://95156028272944"
+		a.Pitch = 0.2
+		a.Volume = 3
+		a:Play()
+	end)
+end
+coroutine.wrap(SOQS_fake_script)()
+local function EVTZQ_fake_script() -- TextButton_2.Script 
+	local script = Instance.new('Script', TextButton_2)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		s = Instance.new("Sky")
+		s.Name = "Sky"
+		s.Parent = game.Lighting
+		s.SkyboxBk = "http://www.roblox.com/asset/?id=10180536577"
+		s.SkyboxDn = "http://www.roblox.com/asset/?id=10180536577"
+		s.SkyboxFt = "http://www.roblox.com/asset/?id=10180536577"
+		s.SkyboxLf = "http://www.roblox.com/asset/?id=10180536577"
+		s.SkyboxRt = "http://www.roblox.com/asset/?id=10180536577"
+		s.SkyboxUp = "http://www.roblox.com/asset/?id=10180536577"
+	end)
+end
+coroutine.wrap(EVTZQ_fake_script)()
+local function LBILZD_fake_script() -- TextButton_3.Script 
+	local script = Instance.new('Script', TextButton_3)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		s = Instance.new("Sky")
+		s.Name = "Sky"
+		s.Parent = game.Lighting
+		s.SkyboxBk = "http://www.roblox.com/asset/?id=97618028537653"
+		s.SkyboxDn = "http://www.roblox.com/asset/?id=97618028537653"
+		s.SkyboxFt = "http://www.roblox.com/asset/?id=97618028537653"
+		s.SkyboxLf = "http://www.roblox.com/asset/?id=97618028537653"
+		s.SkyboxRt = "http://www.roblox.com/asset/?id=97618028537653"
+		s.SkyboxUp = "http://www.roblox.com/asset/?id=97618028537653"
+	end)
+end
+coroutine.wrap(LBILZD_fake_script)()
+local function LPLV_fake_script() -- TextButton_4.Script 
+	local script = Instance.new('Script', TextButton_4)
+
+	function click()
+		function exPro(root)
+			for _, v in pairs(root:GetChildren()) do
+				if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id=10180536577" then
+					v.Parent = nil
+				elseif v:IsA("BasePart") then
+					v.Material = "Plastic"
+					v.Transparency = 0
+					local One = Instance.new("Decal", v)
+					local Two = Instance.new("Decal", v)
+					local Three = Instance.new("Decal", v)
+					local Four = Instance.new("Decal", v)
+					local Five = Instance.new("Decal", v)
+					local Six = Instance.new("Decal", v)
+					One.Texture = "http://www.roblox.com/asset/?id=10180536577"
+					Two.Texture = "http://www.roblox.com/asset/?id=10180536577"
+					Three.Texture = "http://www.roblox.com/asset/?id=10180536577"
+					Four.Texture = "http://www.roblox.com/asset/?id=10180536577"
+					Five.Texture = "http://www.roblox.com/asset/?id=10180536577"
+					Six.Texture = "http://www.roblox.com/asset/?id=10180536577"
+					One.Face = "Front"
+					Two.Face = "Back"
+					Three.Face = "Right"
+					Four.Face = "Left"
+					Five.Face = "Top"
+					Six.Face = "Bottom"
+				end
+				exPro(v)
+			end
+		end
+		function asdf(root)
+			for _, v in pairs(root:GetChildren()) do
+				asdf(v)
+			end
+		end
+		exPro(game.Workspace)
+		asdf(game.Workspace)
+	end
+	
+	script.Parent.MouseButton1Down:connect(click)
+	
+end
+coroutine.wrap(LPLV_fake_script)()
+local function ITMT_fake_script() -- TextButton_5.Script 
+	local script = Instance.new('Script', TextButton_5)
+
+	function click()
+		function exPro(root)
+			for _, v in pairs(root:GetChildren()) do
+				if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id=97618028537653" then
+					v.Parent = nil
+				elseif v:IsA("BasePart") then
+					v.Material = "Plastic"
+					v.Transparency = 0
+					local One = Instance.new("Decal", v)
+					local Two = Instance.new("Decal", v)
+					local Three = Instance.new("Decal", v)
+					local Four = Instance.new("Decal", v)
+					local Five = Instance.new("Decal", v)
+					local Six = Instance.new("Decal", v)
+					One.Texture = "http://www.roblox.com/asset/?id=97618028537653"
+					Two.Texture = "http://www.roblox.com/asset/?id=97618028537653"
+					Three.Texture = "http://www.roblox.com/asset/?id=97618028537653"
+					Four.Texture = "http://www.roblox.com/asset/?id=97618028537653"
+					Five.Texture = "http://www.roblox.com/asset/?id=97618028537653"
+					Six.Texture = "http://www.roblox.com/asset/?id=97618028537653"
+					One.Face = "Front"
+					Two.Face = "Back"
+					Three.Face = "Right"
+					Four.Face = "Left"
+					Five.Face = "Top"
+					Six.Face = "Bottom"
+				end
+				exPro(v)
+			end
+		end
+		function asdf(root)
+			for _, v in pairs(root:GetChildren()) do
+				asdf(v)
+			end
+		end
+		exPro(game.Workspace)
+		asdf(game.Workspace)
+	end
+	
+	script.Parent.MouseButton1Down:connect(click)
+	
+end
+coroutine.wrap(ITMT_fake_script)()
+local function POBA_fake_script() -- TextButton_6.Script 
+	local script = Instance.new('Script', TextButton_6)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		for _, part in pairs(workspace:GetDescendants()) do
+			if part:IsA("BasePart") then
+				local particle = Instance.new("ParticleEmitter")
+				particle.Parent = part
+				particle.SpreadAngle = Vector2.new(0, 0)
+				particle.Rate = 50
+				particle.Speed = NumberRange.new(10)
+				particle.Texture = "rbxassetid://10180536577"
+			end
+		end
+	end)
+end
+coroutine.wrap(POBA_fake_script)()
+local function OMBGBE_fake_script() -- TextButton_7.Script 
+	local script = Instance.new('Script', TextButton_7)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		for _, part in pairs(workspace:GetDescendants()) do
+			if part:IsA("BasePart") then
+				local particle = Instance.new("ParticleEmitter")
+				particle.Parent = part
+				particle.SpreadAngle = Vector2.new(0, 0)
+				particle.Rate = 50
+				particle.Speed = NumberRange.new(10)
+				particle.Texture = "rbxassetid://97618028537653"
+			end
+		end
+	end)
+end
+coroutine.wrap(OMBGBE_fake_script)()
+local function LIKBCTR_fake_script() -- TextButton_8.Script 
+	local script = Instance.new('Script', TextButton_8)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		while true do
+			wait(0.5)
+			for i, v in pairs(game.Players:GetChildren()) do
+				pcall(function()
+					local taco = Instance.new("Part", game.Workspace)
+					taco.CanCollide = true
+					local m = Instance.new("SpecialMesh", taco)
+					m.MeshId = "http://www.roblox.com/asset/?id=124900173701701"
+					m.TextureId = "http://www.roblox.com/asset/?id=102923004202436"
+					taco.CFrame = v.Character.Head.CFrame + Vector3.new(math.random(-50,50),100,math.random(-50,50))
+				end)
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(LIKBCTR_fake_script)()
+local function RTTYISR_fake_script() -- TextButton_9.Script 
+	local script = Instance.new('Script', TextButton_9)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		local a = Instance.new("Hint",workspace)
+		a.Text = "skeletons hacked this game"
+	end)
+end
+coroutine.wrap(RTTYISR_fake_script)()
+local function OAEEBL_fake_script() -- TextButton_10.Script 
+	local script = Instance.new('Script', TextButton_10)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		local a = Instance.new("Hint",workspace)
+		a.Text = "l bozo skeleton on top"
+	end)
+end
+coroutine.wrap(OAEEBL_fake_script)()
+local function FMTI_fake_script() -- TextButton_11.Script 
+	local script = Instance.new('Script', TextButton_11)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		local a = Instance.new("Hint",workspace)
+		a.Text = "SKELETON IS IN THE GAME LOL"
+	end)
+end
+coroutine.wrap(FMTI_fake_script)()
+local function HKTO_fake_script() -- ImageLabel.Dragify 
+	local script = Instance.new('LocalScript', ImageLabel)
+
+	local UIS = game:GetService("UserInputService")
+	function dragify(Frame)
+		dragToggle = nil
+		dragSpeed = 0.15
+		dragInput = nil
+		dragStart = nil
+		dragPos = nil
+		function updateInput(input)
+			Delta = input.Position - dragStart
+			Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.15), {Position = Position}):Play()
+		end
+		Frame.InputBegan:Connect(function(input)
+			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+				dragToggle = true
+				dragStart = input.Position
+				startPos = Frame.Position
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragToggle = false
+					end
+				end)
+			end
+		end)
+		Frame.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+		game:GetService("UserInputService").InputChanged:Connect(function(input)
+			if input == dragInput and dragToggle then
+				updateInput(input)
+			end
+		end)
+	end
+	dragify(script.Parent)
+	
+end
+coroutine.wrap(HKTO_fake_script)()
