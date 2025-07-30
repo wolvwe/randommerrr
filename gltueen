@@ -1,0 +1,373 @@
+----- Script made by Pedrorb03 -----
+game.Players.LocalPlayer.Character.Head:WaitForChild("face")
+while game.Players.LocalPlayer.Character.Head.face.texture ~= "rbxassetid://1039774343"   do
+	wait()
+game.Players.LocalPlayer.Character.Head.face.Texture = "rbxassetid://1039774343" 
+end
+for _,animate in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+	if animate.Name == "Animate" then
+		animate:remove()
+	end
+	if animate.ClassName == "Accessory" then
+		animate:remove()
+	end
+end
+for _,anim in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+	
+		anim:Stop()
+	
+end
+
+rot = 0
+armrot = 0
+suck = nil
+power = 0
+movingup = false
+movingback = false
+popo = 0
+bodyforces = {}
+popos = {}
+for _,part in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if part:IsA("BasePart") then
+		
+			local zerograv = Instance.new("BodyForce",part) zerograv.force = Vector3.new(0, game.Workspace.Gravity, 0) * part:GetMass() zerograv.Name = "ZeroGravity"
+		end
+	end
+ac = true
+
+
+game:GetService("RunService").RenderStepped:connect(function()
+game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+	if movingup == false and  movingback == false then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+			end
+	rot = rot+5
+			for number = 1,#popos do
+				if popos[number].Parent == nil then
+					table.remove(popos,number)
+				end
+			end
+	for _,pop in pairs(popos) do
+		pop.Touched:connect(function(hit)
+			if hit.Locked == false then
+			if hit.Parent ~= game.Players.LocalPlayer.Character then
+				if hit ~= pop then
+				hit.Color = pop.Color
+				hit.Material = pop.Material
+					
+				pop:remove()
+				end
+			end
+			end
+		end)
+	
+	end
+	armrot = armrot+40
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 500	
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 1
+game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.p,game.Workspace.CurrentCamera.CFrame.p+game.Workspace.CurrentCamera.CFrame.lookVector*50000000)
+	if ac == true then
+		game.Players.LocalPlayer.Character.Torso:WaitForChild("Right Shoulder")
+	game.Players.LocalPlayer.Character.Torso["Right Shoulder"].C0 = CFrame.new(game.Players.LocalPlayer.Character.Torso["Right Shoulder"].C0.p) *CFrame.Angles(math.rad(armrot*1.75),0,0)
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Left Shoulder")
+game.Players.LocalPlayer.Character.Torso["Left Shoulder"].C0 = CFrame.new(game.Players.LocalPlayer.Character.Torso["Left Shoulder"].C0.p)*CFrame.Angles(math.rad(armrot*1.75),0,0)
+	game.Players.LocalPlayer.Character.Torso:WaitForChild("Right Hip")
+	game.Players.LocalPlayer.Character.Torso["Right Hip"].C0 = CFrame.new(game.Players.LocalPlayer.Character.Torso["Right Hip"].C0.p) *CFrame.Angles(math.rad(armrot*1.75),0,0)
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Left Hip")
+game.Players.LocalPlayer.Character.Torso["Left Hip"].C0 = CFrame.new(game.Players.LocalPlayer.Character.Torso["Left Hip"].C0.p)*CFrame.Angles(math.rad(armrot*1.75),0,0)
+end	
+	if suck == nil then
+		for _,bod in pairs(bodyforces) do
+		bod:remove()
+	end
+	end
+	if suck ~= nil then
+		local pos1 = game.Players.LocalPlayer:GetMouse().Hit.p
+		local pos2 = game.Players.LocalPlayer.Character.Head.CFrame:toWorldSpace(CFrame.new(Vector3.new(0,0.25,0.5))).p
+		for _,child in pairs(game.Workspace:GetChildren()) do
+if child:IsA("BasePart") then
+if child.Anchored == false then
+if (child.Position-pos1).magnitude <= 1+game.Players.LocalPlayer.Character.Head.Size.Y*5 then
+local hit = child
+local did = false
+				for i=1,#bodyforces do
+					if bodyforces[i].Parent == hit then
+						did = true
+					end 
+				end
+				if did == false then
+				local bodyforce = Instance.new("BodyPosition",hit) bodyforce.Position = pos2 
+				table.insert(bodyforces,bodyforce)
+				end	
+end		
+end
+end
+	for _,child2 in pairs(child:GetChildren()) do
+if child2:IsA("BasePart") then
+if child2.Anchored == false then
+if (child2.Position-pos1).magnitude <= 1+game.Players.LocalPlayer.Character.Head.Size.Y*5 then
+local hit = child2
+local did = false
+				for i=1,#bodyforces do
+					if bodyforces[i].Parent == hit then
+						did = true
+					end 
+				end
+				if did == false then
+				local bodyforce = Instance.new("BodyPosition",hit) bodyforce.Position = pos2 
+				table.insert(bodyforces,bodyforce)
+				end	
+end		
+end
+end
+	for _,child3 in pairs(child2:GetChildren()) do
+if child3:IsA("BasePart") then
+if child3.Anchored == false then
+if (child3.Position-pos1).magnitude <= 1+game.Players.LocalPlayer.Character.Head.Size.Y*5 then
+local hit = child3
+local did = false
+				for i=1,#bodyforces do
+					if bodyforces[i].Parent == hit then
+						did = true
+					end 
+				end
+				if did == false then
+				local bodyforce = Instance.new("BodyPosition",hit) bodyforce.Position = pos2 
+				table.insert(bodyforces,bodyforce)
+				end	
+end		
+end
+end
+
+end
+end
+end
+
+	for _,bod in pairs(bodyforces) do
+	bod.Position = game.Players.LocalPlayer.Character.Head.CFrame.p
+	end
+		suck.Mesh.Scale = Vector3.new(1+game.Players.LocalPlayer.Character.Head.Size.Y*5,(pos1-pos2).magnitude,1+game.Players.LocalPlayer.Character.Head.Size.Y*5)
+		suck.CFrame = CFrame.new((pos1+pos2)/2,pos1) * CFrame.Angles(math.rad(90),rot,0)
+		local ray = Ray.new(pos2,(pos1-pos2).unit*600)
+		local hit,normal,position = game.Workspace:FindPartOnRay(ray,game.Players.LocalPlayer.Character)
+	
+		if hit ~= nil then
+			if hit.Anchored == false then
+				local did = false
+				for i=1,#bodyforces do
+					if bodyforces[i].Parent == hit then
+						did = true
+					end 
+				end
+				if did == false then
+				local bodyforce = Instance.new("BodyPosition",hit) bodyforce.Position = pos2 
+				table.insert(bodyforces,bodyforce)
+				end			
+				end
+		end
+	
+		
+
+
+
+	end
+end)
+game:GetService("UserInputService").InputBegan:connect(function(key)
+	if key.KeyCode == Enum.KeyCode.E then
+suck = Instance.new("Part",game.Players.LocalPlayer.Character)
+local mesh = Instance.new("SpecialMesh",suck) mesh.MeshId = "rbxassetid://1040723301"
+suck.Transparency = 0.5
+suck.Color = Color3.fromRGB(255,255,255)
+suck.CanCollide = false
+suck.Anchored = true	
+suck.Size = Vector3.new(0,0,0)
+game.Players.LocalPlayer.Character.Head:WaitForChild("face")
+
+while game.Players.LocalPlayer.Character.Head.face.texture ~= "rbxassetid://505480085"  do
+	wait()
+game.Players.LocalPlayer.Character.Head.face.Texture = "rbxassetid://505480085" 
+end
+
+
+for _,decal in pairs(game.Players.LocalPlayer.Character.Head:GetChildren()) do
+	if decal.ClassName == "Decal" then
+		decal:remove()
+	end
+end
+local decal = Instance.new("Decal",game.Players.LocalPlayer.Character.Head) decal.Texture = "http://www.roblox.com/asset/?id=1038938817" decal.Face = "Front"
+
+	end
+	if key.KeyCode == Enum.KeyCode.W then
+		if movingup == false then
+			movingup = true
+			while movingup == true do
+				wait()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector*200
+			end
+		end
+	end
+if key.KeyCode == Enum.KeyCode.S then
+		if movingback == false then
+			movingback = true
+			while movingback == true do
+				wait()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = -game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector*200
+			
+			end
+		end
+	end
+if key.KeyCode == Enum.KeyCode.F then
+	local food = math.random(1,7)
+local part = Instance.new("Part",game.Workspace) part.CFrame = CFrame.new(0,25,0)	
+local meshs = Instance.new("SpecialMesh",part)	
+	if food == 1 then
+part.Size = Vector3.new(1.266, 1.704, 0.978)
+meshs.MeshId = "rbxassetid://923471248"	
+	meshs.TextureId = "rbxassetid://923471252"	
+	end
+	if food == 2 then
+part.Size = Vector3.new(2.18, 0.733, 2.18)
+meshs.MeshId = "http://www.roblox.com/asset/?id=107432887"	
+	meshs.TextureId = "rbxassetid://107432992"	
+	end
+	if food == 3 then
+part.Size = Vector3.new(1.764, 1.129, 1.686)
+meshs.MeshId = "http://www.roblox.com/asset/?id=90824595"	
+	meshs.TextureId = "rbxassetid://90819050"	
+	end
+	if food == 4 then
+part.Size = Vector3.new(2.903, 2.903, 0.531)
+meshs.MeshId = "http://www.roblox.com/asset/?id=18417911"	
+	meshs.TextureId = "rbxassetid://18417918"	
+	end
+	if food == 5 then
+part.Size = Vector3.new(2.056, 0.615, 0.907)
+meshs.MeshId = "http://www.roblox.com/asset/?id=29896287"	
+	meshs.TextureId = "rbxassetid://29896653"	
+	end
+	if food == 6 then
+part.Size = Vector3.new(0.731, 1.693, 0.708)
+meshs.MeshId = "http://www.roblox.com/asset/?id=13073626"	
+	meshs.TextureId = "rbxassetid://13073598"	
+	end
+	if food == 7 then
+part.Size = Vector3.new(1.997, 1.986, 1.997)
+meshs.MeshId = "http://www.roblox.com/asset/?id=125736357"	
+	meshs.TextureId = "rbxassetid://125728597"	
+	end
+end
+if key.KeyCode == Enum.KeyCode.C then
+	if popo > 0 then
+		popo = popo-1
+		local ball = Instance.new("Part",game.Workspace) ball.Shape = Enum.PartType.Ball ball.Material = Enum.Material.Slate ball.Color = Color3.fromRGB(105, 64, 40) ball.CanCollide = false 
+		ball.BackSurface = Enum.SurfaceType.SmoothNoOutlines
+		ball.FrontSurface = Enum.SurfaceType.SmoothNoOutlines
+		ball.LeftSurface = Enum.SurfaceType.SmoothNoOutlines
+		ball.RightSurface = Enum.SurfaceType.SmoothNoOutlines
+		ball.TopSurface = Enum.SurfaceType.SmoothNoOutlines
+		ball.BottomSurface = Enum.SurfaceType.SmoothNoOutlines
+		ball.Size = Vector3.new(game.Players.LocalPlayer.Character.Torso.Size.Y/2,game.Players.LocalPlayer.Character.Torso.Size.Y/2,game.Players.LocalPlayer.Character.Torso.Size.Y/2)
+ball.CFrame = CFrame.new(game.Players.LocalPlayer.Character.Torso.CFrame:toWorldSpace(CFrame.new(0,-game.Players.LocalPlayer.Character.Torso.Size.Y,0)).p,game.Players.LocalPlayer:GetMouse().Hit.p)	
+ball.Velocity = ball.CFrame.lookVector*(game.Players.LocalPlayer.Character.Torso.Position-game.Players.LocalPlayer:GetMouse().Hit.p).magnitude*3
+table.insert(popos,ball)
+game:GetService("Debris"):AddItem(ball,5)
+	end
+end
+
+
+
+end)
+game:GetService("UserInputService").InputEnded:connect(function(key)
+	if key.KeyCode == Enum.KeyCode.E then
+suck:remove()
+suck = nil
+game.Players.LocalPlayer.Character.Head:WaitForChild("face")
+
+game.Players.LocalPlayer.Character.Head:WaitForChild("face")
+while game.Players.LocalPlayer.Character.Head.face.texture ~= "rbxassetid://1039774343"   do
+	wait()
+game.Players.LocalPlayer.Character.Head.face.Texture = "rbxassetid://1039774343" 
+end
+	end
+		if key.KeyCode == Enum.KeyCode.W then
+			movingup = false
+			 
+		end
+		if key.KeyCode == Enum.KeyCode.S then
+			movingback = false
+			
+		end
+	
+		
+end)
+game.Players.LocalPlayer.Character.Head.Touched:connect(function(hit)
+	if hit.Parent ~= game.Players.LocalPlayer.Character then
+	
+		if hit ~= nil then
+	if hit.Anchored == false then
+		hit:remove()
+		popo = popo+2
+	local sound = Instance.new("Sound",game.Players.LocalPlayer.Character.Head) sound.SoundId = "rbxassetid://179303694" sound:Play()
+			game:GetService("Debris"):AddItem(sound,5)
+while ac == false do
+wait()
+if ac == true then
+break
+end
+end
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Neck")
+game.Players.LocalPlayer.Character.HumanoidRootPart:WaitForChild("RootJoint")
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Right Shoulder")
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Left Shoulder")
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Right Hip")
+game.Players.LocalPlayer.Character.Torso:WaitForChild("Left Hip")
+local rootjoint = game.Players.LocalPlayer.Character.HumanoidRootPart.RootJoint:Clone()
+local neck = game.Players.LocalPlayer.Character.Torso.Neck:Clone()
+local rightShoulder = game.Players.LocalPlayer.Character.Torso["Right Shoulder"]:Clone()
+local leftShoulder = game.Players.LocalPlayer.Character.Torso["Left Shoulder"]:Clone()
+local rightShoulder = game.Players.LocalPlayer.Character.Torso["Right Shoulder"]:Clone()
+local rightHip = game.Players.LocalPlayer.Character.Torso["Right Hip"]:Clone()
+local leftHip = game.Players.LocalPlayer.Character.Torso["Left Hip"]:Clone()
+ac = false
+wait(0.1)
+game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+			for _,part in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if part:IsA("BasePart") then
+					part.Size = part.Size*1.05
+game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+				end
+			end
+game.Players.LocalPlayer.CameraMaxZoomDistance = game.Players.LocalPlayer.CameraMaxZoomDistance*1.05
+game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+	rootjoint.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+	neck.Parent = game.Players.LocalPlayer.Character.Torso
+	rightShoulder.Parent = game.Players.LocalPlayer.Character.Torso
+	leftShoulder.Parent = game.Players.LocalPlayer.Character.Torso
+	rightHip.Parent = game.Players.LocalPlayer.Character.Torso
+	leftHip.Parent = game.Players.LocalPlayer.Character.Torso
+	neck.C0 = CFrame.new(neck.C0.p*1.05)*CFrame.Angles(math.rad(-90),0,math.rad(180))
+	rightShoulder.C0 = CFrame.new(rightShoulder.C0.p*1.05)
+	leftShoulder.C0 = CFrame.new(leftShoulder.C0.p*1.05)
+	rightHip.C0 = CFrame.new(rightHip.C0.p*1.05)
+	leftHip.C0 = CFrame.new(leftHip.C0.p*1.05)
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = game.Players.LocalPlayer.Character.Humanoid.MaxHealth*1.2
+	game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+	for _,part in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if part:FindFirstChild("ZeroGravity") then
+			part.ZeroGravity:remove()
+		end
+	end
+	for _,part in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if part:IsA("BasePart") then
+			part.CustomPhysicalProperties = PhysicalProperties.new(0,0,0,0,0)
+			local zerograv = Instance.new("BodyForce",part) zerograv.force = Vector3.new(0, game.Workspace.Gravity, 0) * part:GetMass() zerograv.Name = "ZeroGravity"
+		end
+	end
+wait(0.1)
+	ac = true
+			end
+end
+	
+	end
+end)
