@@ -1,0 +1,217 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--[[ 
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+-- UTG BY NICOLASPIETRO - GUI COM SCROLLING E ABAS
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "UTG_BY_NICOLASPIETRO"
+screenGui.Parent = game.CoreGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 240, 0, 500)
+mainFrame.Position = UDim2.new(0, 10, 0, 0.1)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 20
+title.Text = "UTG BY KJ_32261"
+title.Parent = mainFrame
+
+-- DETECTOR DE DONO
+if player.Name == "KJ_32261" then
+    title.Text = "UTG OWNER DETECTED"
+
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "UTG OWNER DETECTED",
+        Text = "barbiegreugey is in game he are owner of script",
+        Duration = 5
+    })
+
+    local sound = Instance.new("Sound", workspace)
+    sound.SoundId = "rbxassetid://95305396196239"
+    sound.Volume = 2
+    sound.Looped = true
+    sound:Play()
+end
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -30, 0, 0)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 18
+closeButton.Text = "X"
+closeButton.Parent = mainFrame
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -60, 0, 0)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 50)
+minimizeButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+minimizeButton.Font = Enum.Font.SourceSansBold
+minimizeButton.TextSize = 18
+minimizeButton.Text = "-"
+minimizeButton.Parent = mainFrame
+
+local isMinimized = false
+minimizeButton.MouseButton1Click:Connect(function()
+    mainFrame.Size = isMinimized and UDim2.new(0, 240, 0, 500) or UDim2.new(0, 240, 0, 40)
+    isMinimized = not isMinimized
+end)
+
+local tabButtons = Instance.new("Frame")
+tabButtons.Size = UDim2.new(1, 0, 0, 30)
+tabButtons.Position = UDim2.new(0, 0, 0, 40)
+tabButtons.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+tabButtons.Parent = mainFrame
+
+local function createTab(name, position)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 80, 1, 0)
+    button.Position = UDim2.new(0, position * 80, 0, 0)
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 14
+    button.Text = name
+    button.Name = name
+    button.Parent = tabButtons
+    return button
+end
+
+local tabFrames = {}
+local tabNames = {"Scripts", "requires", "server des-"}
+
+for _, name in ipairs(tabNames) do
+    local frame = Instance.new("ScrollingFrame")
+    frame.Size = UDim2.new(1, 0, 1, -70)
+    frame.Position = UDim2.new(0, 0, 0, 70)
+    frame.CanvasSize = UDim2.new(0, 0, 0, 0)
+    frame.ScrollBarThickness = 8
+    frame.BackgroundTransparency = 1
+    frame.Visible = false
+    frame.Name = name
+    frame.Parent = mainFrame
+
+    local layout = Instance.new("UIListLayout")
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    layout.Padding = UDim.new(0, 5)
+    layout.Parent = frame
+
+    layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        frame.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 10)
+    end)
+
+    tabFrames[name] = frame
+end
+
+tabFrames["Scripts"].Visible = true
+
+for i, name in ipairs(tabNames) do
+    local button = createTab(name, i - 1)
+    button.MouseButton1Click:Connect(function()
+        for _, frame in pairs(tabFrames) do
+            frame.Visible = false
+        end
+        tabFrames[name].Visible = true
+    end)
+end
+
+local isExecuting = false
+local function createButton(name, url, musicId, parent)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, -20, 0, 40)
+    button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 18
+    button.Text = name
+    button.Parent = parent
+
+    button.MouseButton1Click:Connect(function()
+        if isExecuting then return end
+        isExecuting = true
+
+        local clickSound = Instance.new("Sound", workspace)
+        clickSound.SoundId = "rbxassetid://156785206"
+        clickSound.Volume = 3
+        clickSound:Play()
+        game:GetService("Debris"):AddItem(clickSound, 2)
+
+        for _, obj in pairs(workspace:GetChildren()) do
+            if obj:IsA("Sound") then
+                obj:Stop()
+                obj:Destroy()
+            end
+        end
+
+        if musicId and musicId ~= "" then
+            local sound = Instance.new("Sound", workspace)
+            sound.SoundId = "rbxassetid://" .. musicId
+            sound.Volume = 2
+            sound.Looped = true
+            sound:Play()
+        end
+
+        local success, result = pcall(function()
+            loadstring(game:HttpGet(url))()
+        end)
+        if not success then
+            warn("Erro ao executar o script: " .. tostring(result))
+        end
+
+        task.wait(2)
+        isExecuting = false
+    end)
+end
+
+-- Pack 1 (Requires)
+createButton("Grab Knife V4", "https://raw.githubusercontent.com/nicolasbarbosa323/grab-knife/refs/heads/main/Grab%20V4.txt", "16190760285", tabFrames["requires"])
+createButton("AK47", "https://raw.githubusercontent.com/sinret/rbxscript.com-scripts-reuploads-/main/ak47", "1845149698", tabFrames["Scripts"])
+createButton("Metal Pipe", "https://raw.githubusercontent.com/nicolasbarbosa323/metal-pip/refs/heads/main/metal%20pipe", "", tabFrames["Scripts"])
+createButton("Xester", "https://raw.githubusercontent.com/nicolasbarbosa323/xester/refs/heads/main/qC7MUFRJ.txt", "16190760285", tabFrames["Scripts"])
+createButton("Blocs of Death", "https://raw.githubusercontent.com/nicolasbarbosa323/blocs-of-death/refs/heads/main/blocs%20of%20death", "", tabFrames["Scripts"])
+createButton("Sin Dragon", "https://raw.githubusercontent.com/nicolasbarbosa323/sin-dragon/refs/heads/main/Fe_sin_dragon_music_customizado_final.lua", "", tabFrames["Scripts"])
+createButton("Revenge Hands", "https://raw.githubusercontent.com/nicolasbarbosa323/sin-dragon/refs/heads/main/reevenge%20hands.txt", "112461424977148", tabFrames["Scripts"])
+createButton("Vereus", "https://raw.githubusercontent.com/nicolasbarbosa323/xester/refs/heads/main/fLrx77PM.txt", "1845149698", tabFrames["Scripts"])
+createButton("John Doe", "https://raw.githubusercontent.com/nicolasbarbosa323/john-doe/refs/heads/main/john%20doe%20completed.lua", "", tabFrames["requires"])
+createButton("Good Cop Bad Cop", "https://raw.githubusercontent.com/nicolasbarbosa323/good-cop-bad-coop/refs/heads/main/KwuminKa.txt", "1845805363", tabFrames["Scripts"])
+createButton("Gaster Hands", "https://raw.githubusercontent.com/nicolasbarbosa323/good-cop-bad-coop/refs/heads/main/GasterHands.txt", "1838626744", tabFrames["Scripts"])
+createButton("Funnyfly", "https://raw.githubusercontent.com/nicolasbarbosa323/fix-game/refs/heads/main/funny%20fly", "", tabFrames["Scripts"])
+createButton("Fix", "https://raw.githubusercontent.com/nicolasbarbosa323/fix-game/refs/heads/main/fix.lua", "", tabFrames["Scripts"])
+createButton("CrystalDance", "https://raw.githubusercontent.com/nicolasbarbosa323/crytasl/refs/heads/main/Krystal%20Dance%20V2.lua.txt", "", tabFrames["Scripts"])
+createButton("Goner", "https://raw.githubusercontent.com/nicolasbarbosa323/crytasl/refs/heads/main/goner.lua.txt", "1845149698", tabFrames["requires"])
+createButton("Serveradmin", "https://raw.githubusercontent.com/nicolasbarbosa323/crytasl/refs/heads/main/serveradmin.lua", "9038254260", tabFrames["requires"])
+createButton("Ban hammer", "https://raw.githubusercontent.com/nicolasbarbosa323/ban-hammer/refs/heads/main/ban", "113920511880753", tabFrames["Scripts"])
+createButton("grakeddar", "https://raw.githubusercontent.com/nicolasbarbosa323/grakkeda/refs/heads/main/Roblox%20Genkadda%20omega%20leaked.txt", "9038254260", tabFrames["Scripts"])
+createButton("kirito blades", "https://raw.githubusercontent.com/nicolasbarbosa323/the-angel/refs/heads/main/Kirito%20Blades.txt", "9038254260", tabFrames["Scripts"])
+createButton("THE angel", "https://raw.githubusercontent.com/nicolasbarbosa323/the-angel/refs/heads/main/The%20Angel.txt", "1838626744", tabFrames["Scripts"])
+createButton("The Sun", "https://raw.githubusercontent.com/nicolasbarbosa323/the-sun/refs/heads/main/the%20sun", "", tabFrames["Scripts"])
+createButton("Killbot", "https://raw.githubusercontent.com/nicolasbarbosa323/rare/refs/heads/main/killbot.lua", "95305396196239", tabFrames["Scripts"])
+createButton("Kitchen Gun", "https://raw.githubusercontent.com/nicolasbarbosa323/rare/refs/heads/main/kitcher%20gun.lua", "137995205966366", tabFrames["Scripts"])
+createButton("script seacher", "https://rawscripts.net/raw/Universal-Script-Script-Searcher-23625", "", tabFrames["Scripts"])
+createButton("coca espuma", "https://raw.githubusercontent.com/nicolasbarbosa323/cocacola-espuma/refs/heads/main/coca", "", tabFrames["Scripts"])
+createButton("Steve", "https://raw.githubusercontent.com/nicolasbarbosa323/steve/refs/heads/main/rare.txt", "", tabFrames["Scripts"])
+
+-- Pack 2 (Requires)
+createButton("Spectrum Glitcher", "https://raw.githubusercontent.com/nicolasbarbosa323/SCPECTRUMGLITCHER/refs/heads/main/SpectrumG%20(1).txt", "", tabFrames["requires"])
+createButton("Nebula Glitcher", "https://raw.githubusercontent.com/nicolasbarbosa323/nebulaglitcher/refs/heads/main/Nebula's%20Star%20Glitcher%20(EDITED%20BY%20FENIX7667%20IMORTAL%20EDIT%20).txt", "1845149698", tabFrames["requires"])
+
+-- Pack 3 (Server Des-)
+createButton("C00lGui", "https://raw.githubusercontent.com/nicolasbarbosa323/c00lgui/refs/heads/main/c00lguiv3rx.lua.txt", "", tabFrames["server des-"])
+createButton("RO-xploit", "https://rawscripts.net/raw/Universal-Script-ro-xploit-6-9233", "", tabFrames["server des-"])
