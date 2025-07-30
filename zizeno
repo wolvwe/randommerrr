@@ -1,0 +1,97 @@
+local tool = Instance.new("Tool")
+tool.Name = "Portal Gun"
+tool.RequiresHandle = true
+tool.CanBeDropped = false
+
+local handle = Instance.new("Part")
+handle.Name = "Handle"
+handle.Size = Vector3.new(1, 1, 5)
+handle.Transparency = 1
+handle.Anchored = false
+handle.CanCollide = false
+handle.Parent = tool
+
+local isBluePortalNext = true
+local bluePortal = nil
+local redPortal = nil
+local teleportCooldown = false
+local teleportCooldownTime = 1
+
+local function createPortal(color, position)
+    local portal = Instance.new("Part")
+    portal.Size = Vector3.new(5, 10, 1)
+    portal.Anchored = true
+    portal.CanCollide = false
+    portal.CFrame = CFrame.new(position + Vector3.new(0, 5, 0))
+    portal.Color = color
+    portal.Transparency = 0.3
+    portal.Parent = workspace
+    return portal
+end
+
+local function teleportPlayer(player, targetPosition)
+    local character = player.Character
+    if character and not teleportCooldown then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            teleportCooldown = true
+            humanoidRootPart.CFrame = CFrame.new(targetPosition + Vector3.new(0, 5, 0))
+            wait(teleportCooldownTime)
+            teleportCooldown = false
+        end
+    end
+end
+
+local function placePortal(mouse)
+    if isBluePortalNext then
+        if bluePortal then
+            bluePortal:Destroy()
+        end
+        bluePortal = createPortal(Color3.new(0, 0, 1), mouse.Hit.p)
+        isBluePortalNext = false
+        bluePortal.Touched:Connect(function(hit)
+            if redPortal and hit.Parent:FindFirstChild("Humanoid") then
+                local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+                if player then
+                    teleportPlayer(player, redPortal.Position)
+                end
+            end
+        end)
+    else
+        if redPortal then
+            redPortal:Destroy()
+        end
+        redPortal = createPortal(Color3.new(1, 0, 0), mouse.Hit.p)
+        isBluePortalNext = true
+        redPortal.Touched:Connect(function(hit)
+            if bluePortal and hit.Parent:FindFirstChild("Humanoid") then
+                local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+                if player then
+                    teleportPlayer(player, bluePortal.Position)
+                end
+            end
+        end)
+    end
+end
+
+local function onPlayerDied()
+    if bluePortal then
+        bluePortal:Destroy()
+    end
+    if redPortal then
+        redPortal:Destroy()
+    end
+end
+
+tool.Activated:Connect(function()
+    local player = game.Players.LocalPlayer
+    local mouse = player:GetMouse()
+    placePortal(mouse)
+end)
+
+local player = game.Players.LocalPlayer
+player.CharacterAdded:Connect(function(character)
+    character:WaitForChild("Humanoid").Died:Connect(onPlayerDied)
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
