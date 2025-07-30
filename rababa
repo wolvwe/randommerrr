@@ -1,0 +1,540 @@
+--//Created by WaverlyCole
+player = game:service'Players'.LocalPlayer
+mouse = player:GetMouse()
+char = player.Character
+humanoid = char.Humanoid
+rootpart = char.HumanoidRootPart
+torso = char.Torso
+
+char.Humanoid.MaxHealth=300
+wait()
+char.Humanoid.Health=300
+char.Humanoid.WalkSpeed=20
+--//Joints
+N=torso:FindFirstChild("Neck")
+RS=torso:FindFirstChild("Right Shoulder")
+LS=torso:FindFirstChild("Left Shoulder")
+RH=torso:FindFirstChild("Right Hip")
+LH=torso:FindFirstChild("Left Hip")
+RJ=rootpart:FindFirstChild("RootJoint")
+--//Default C0's
+NC0=CFrame.new(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+RSC0=CFrame.new(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0)
+LSC0=CFrame.new(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)
+RHC0=CFrame.new(1, -1, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0)
+LHC0=CFrame.new(-1, -1, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)
+RJC0=CFrame.new(0, 0, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+--//Cheats
+cframe = CFrame.new
+angle = CFrame.Angles
+radian = math.rad
+random = math.random
+--//Variables
+local idle,walk,fall,jump = false,false,false,false
+local jumpcheck = false
+local specialanim = nil
+local height = 1
+--//Functions
+local function Split(inputstr,sep)
+	local t,i = {},1
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+		t[i] = str
+		i = i + 1
+	end
+	return t
+end
+local function weldBetween(a, b)
+   		local weld = Instance.new("ManualWeld")
+    	weld.Part0 = a
+    	weld.Part1 = b
+    	weld.C0 = CFrame.new()
+    	weld.C1 = b.CFrame:inverse() * a.CFrame
+    	weld.Parent = a
+    	return weld;
+end
+local getChar = function(part)
+	if part.Parent:FindFirstChild('Humanoid') then
+		return part.Parent
+	elseif part.Parent.Parent:FindFirstChild('Humanoid') then
+		return part.Parent.Parent
+	else
+		return nil
+	end
+end
+local animate = function(joint,prop,cfrmz,alp)
+	joint[prop]=joint[prop]:lerp(cfrmz,alp)
+end
+local keyDown = function(key)
+	if key == 'q' then
+		--
+	end
+end
+--//Movement
+game:service'RunService'.RenderStepped:connect(function()
+	if rootpart.Velocity.y < -1 and not idle then
+		idle,walk,fall,jump = false,false,true,false
+	elseif jumpcheck then
+		idle,walk,fall,jump = false,false,false,true
+	elseif humanoid.MoveDirection ~= Vector3.new(0,0,0) then
+		idle,walk,fall,jump = false,true,false,false
+	elseif humanoid.MoveDirection == Vector3.new(0,0,0) then
+		idle,walk,fall,jump = true,false,false,false
+	end
+end)
+humanoid.StateChanged:connect(function(state)
+    if state == Enum.HumanoidStateType.Jumping then
+        jumpcheck = true
+    else
+        jumpcheck = false
+    end
+end)
+--//Created by WaverlyCole
+--//Animate
+char.Animate.Disabled = true
+humanoid.Animator:Destroy()
+local playAnimation = coroutine.wrap(function()
+	while true do
+		game:service'RunService'.RenderStepped:wait()
+		if specialanim then
+			specialanim()
+		elseif idle then
+			animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(math.sin(tick()*3)),radian(0),radian(-60)),0.3)
+			animate(RS,'C0',RSC0*cframe(.1,0,0)*angle(radian(math.sin(tick())*5),radian(0),radian(60 + math.sin(tick()*2))*-5),0.3)
+			animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(math.sin(tick())*5),radian(0),radian(10)),0.3)
+			animate(RH,'C0',RHC0*cframe(0,.1 + math.sin(tick()*3)/20,-.1)*angle(radian(0),radian(-30),radian(0)),0.3)
+			animate(LH,'C0',LHC0*cframe(0,.1 + math.sin(tick()*3)/20,.1)*angle(radian(-5),radian(-15),radian(0)),0.3)
+			animate(RJ,'C0',RJC0*cframe(0,0,-.1 + math.sin(tick()*3)/-20)*angle(radian(0),radian(0),radian(70)),0.3)
+		elseif walk then
+			animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(-3),radian(0),radian(0)),0.3)
+			animate(RS,'C0',RSC0*cframe(0,0,0)*angle(radian(math.sin(tick()*3)),radian(20 + math.sin(tick()*3)),radian(70 + math.sin(tick()*3)*2)),0.3)
+			animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(0),radian(math.sin(tick()*2)*5),radian(30 + math.sin(tick()*2)*5)),0.3)
+			animate(RH,'C0',RHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(math.sin(tick()*(char.Humanoid.WalkSpeed/2))*40)),0.3)
+			animate(LH,'C0',LHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(math.sin(tick()*-(char.Humanoid.WalkSpeed/2))*-40)),0.3)
+			animate(RJ,'C0',RJC0*cframe(0,0,0)*angle(radian(5),radian(0),radian(0)),0.3)
+		elseif fall then
+			animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(RS,'C0',RSC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(RH,'C0',RHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(LH,'C0',LHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(RJ,'C0',RJC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+		elseif jump then
+			animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(RS,'C0',RSC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(RH,'C0',RHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(LH,'C0',LHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+			animate(RJ,'C0',RJC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(0)),0.3)
+		end
+	end
+end)
+wand = Instance.new('Part')
+wand.Name = 'Wand'
+wandmesh = Instance.new('SpecialMesh',wand)
+wandmesh.MeshId = 'http://www.roblox.com/asset?id=69886132'
+wandmesh.Scale = Vector3.new(1,1,1)
+wandmesh.TextureId = 'http://www.roblox.com/asset/?id=31656155'
+wand.Size = Vector3.new(.4,.4,2)
+wand.CanCollide=false
+wand.CFrame = char['Right Arm'].CFrame * CFrame.Angles(0,math.rad(180),0) * CFrame.new(0,-1,.8)
+wand.Parent = char
+local weld = weldBetween(wand,char['Right Arm'])
+WANDC0 = weld.C0
+WANDWELD = weld
+sound1 = Instance.new('Sound',wand)
+sound1.SoundId = 'http://www.roblox.com/asset/?id=193316310'
+sound1.Volume = 2
+playAnimation()
+spawn(function()
+	local pointer = Instance.new('Part')
+	pointer.Size = Vector3.new(.5,.5,.5)
+	pointer.CanCollide=false
+	pointer.Anchored=true
+	pointer.Material = 'Neon'
+	pointer.TopSurface = 10
+	pointer.BottomSurface = 10
+	pointer.BrickColor = BrickColor.new('White')
+	pointer.Shape = 'Ball'
+	pointer.Parent = char
+	game:service'RunService'.RenderStepped:connect(function()
+		pointer.CFrame = mouse.Hit
+	end)
+end)
+local spellAnimation = function()
+	spawn(function()
+		specialanim = function()
+			animate(RS,'C0',RSC0*cframe(0,0,0)*angle(radian(-30),radian(0),radian(0)),0.3)
+			if idle then
+				animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(math.sin(tick()*3)),radian(0),radian(-60)),0.3)
+				animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(math.sin(tick())*5),radian(0),radian(10)),0.3)
+				animate(RH,'C0',RHC0*cframe(0,.1 + math.sin(tick()*3)/20,-.1)*angle(radian(0),radian(-30),radian(0)),0.3)
+				animate(LH,'C0',LHC0*cframe(0,.1 + math.sin(tick()*3)/20,.1)*angle(radian(-5),radian(-15),radian(0)),0.3)
+				animate(RJ,'C0',RJC0*cframe(0,0,-.1 + math.sin(tick()*3)/-20)*angle(radian(0),radian(0),radian(70)),0.3)
+			else
+				animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(-3),radian(0),radian(0)),0.3)
+				animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(0),radian(math.sin(tick()*2)*5),radian(30 + math.sin(tick()*2)*5)),0.3)
+				animate(RH,'C0',RHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(math.sin(tick()*(char.Humanoid.WalkSpeed/2))*40)),0.3)
+				animate(LH,'C0',LHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(math.sin(tick()*-(char.Humanoid.WalkSpeed/2))*-40)),0.3)
+				animate(RJ,'C0',RJC0*cframe(0,0,0)*angle(radian(5),radian(0),radian(0)),0.3)
+			end
+		end
+		wait(.1)
+		specialanim = function()
+			animate(RS,'C0',RSC0*cframe(0,0,0)*angle(radian(-20),radian(20),radian(90)),0.3)
+			if idle then
+				animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(math.sin(tick()*3)),radian(0),radian(-60)),0.3)
+				animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(math.sin(tick())*5),radian(0),radian(10)),0.3)
+				animate(RH,'C0',RHC0*cframe(0,.1 + math.sin(tick()*3)/20,-.1)*angle(radian(0),radian(-30),radian(0)),0.3)
+				animate(LH,'C0',LHC0*cframe(0,.1 + math.sin(tick()*3)/20,.1)*angle(radian(-5),radian(-15),radian(0)),0.3)
+				animate(RJ,'C0',RJC0*cframe(0,0,-.1 + math.sin(tick()*3)/-20)*angle(radian(0),radian(0),radian(70)),0.3)
+			else
+				animate(N,'C0',NC0*cframe(0,0,0)*angle(radian(-3),radian(0),radian(0)),0.3)
+				animate(LS,'C0',LSC0*cframe(0,0,0)*angle(radian(0),radian(math.sin(tick()*2)*5),radian(30 + math.sin(tick()*2)*5)),0.3)
+				animate(RH,'C0',RHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(math.sin(tick()*(char.Humanoid.WalkSpeed/2))*40)),0.3)
+				animate(LH,'C0',LHC0*cframe(0,0,0)*angle(radian(0),radian(0),radian(math.sin(tick()*-(char.Humanoid.WalkSpeed/2))*-40)),0.3)
+				animate(RJ,'C0',RJC0*cframe(0,0,0)*angle(radian(5),radian(0),radian(0)),0.3)
+			end
+		end
+		wait(.5)
+		specialanim = nil
+	end)
+end
+local createSpell = function(speed,color,sound,spread)
+	local hitpart = nil
+	local connectPoints = function(effect,core,point1,point2,color)
+		local spellTrail = Instance.new('Part')
+		spellTrail.BrickColor = BrickColor.new(color)
+		spellTrail.TopSurface = 10
+		spellTrail.BottomSurface = 10
+		spellTrail.CanCollide = false
+		spellTrail.Anchored = true
+		spellTrail.Transparency = .3
+		spellTrail.Material = 'Neon'
+		local magnitude = (point1.p - point2.p).magnitude
+		local ray = Ray.new(point1.p,(point2.p - point1.p).unit*magnitude)
+		local part,pos,normal = workspace:FindPartOnRayWithIgnoreList(ray,char:GetChildren(),false,true)
+		if part then
+			hitpart = part
+		end
+		if part and part.Name ~= 'Base' then
+			magnitude = (point1.p - part.CFrame.p).magnitude
+			spellTrail.Size = Vector3.new(.7,.7,magnitude)
+			spellTrail.CFrame = CFrame.new(point1.p,part.CFrame.p) * CFrame.new(0,0,-magnitude/2)
+		else
+			magnitude = (point1.p - point2.p).magnitude
+			spellTrail.Size = Vector3.new(.7,.7,magnitude)
+			spellTrail.CFrame = CFrame.new(point1.p,point2.p) * CFrame.new(0,0,-magnitude/2)
+		end
+		local lockcframe = spellTrail.CFrame
+		spellTrail.Parent = core
+		local centerTrail = spellTrail:Clone()
+		centerTrail.BrickColor = BrickColor.new('White')
+		centerTrail.Size = Vector3.new(.2,.2,magnitude)
+		centerTrail.CFrame = spellTrail.CFrame
+		centerTrail.Transparency = 0
+		centerTrail.Parent = spellTrail
+		effect.CFrame = spellTrail.CFrame * CFrame.new(0,0,-magnitude/2)
+		spawn(function()
+			while spellTrail.Parent do
+				spellTrail.Transparency = spellTrail.Transparency + .05
+				centerTrail.Transparency = centerTrail.Transparency + .07
+				spellTrail.Size = Vector3.new(spellTrail.Size.X-.04,spellTrail.Size.Y-.04,magnitude)
+				centerTrail.Size = Vector3.new(centerTrail.Size.X-.01,centerTrail.Size.Y-.01,magnitude)
+				spellTrail.CFrame = lockcframe
+				centerTrail.CFrame = lockcframe
+				game:service'RunService'.RenderStepped:wait()
+			end
+		end)
+		spawn(function()
+			wait(.2)
+			spellTrail:Destroy()
+		end)
+	end
+	sound:Play()
+	local hit = mouse.Hit
+	local spellCore = Instance.new('Part')
+	spellCore.Size = Vector3.new(1,1,1)
+	spellCore.CanCollide = false
+	spellCore.Anchored = true
+	spellCore.Transparency = 1
+	spellCore.CFrame = CFrame.new(wand.CFrame.p,hit.p)
+	spellCore.Parent=char
+	local spellEffect = Instance.new('Part')
+	spellEffect.BrickColor = BrickColor.new(color)
+	spellEffect.Size = Vector3.new(.8,.8,.8)
+	spellEffect.Material = 'Neon'
+	spellEffect.Shape = 'Ball'
+	spellEffect.TopSurface = 10
+	spellEffect.BottomSurface = 10
+	spellEffect.CanCollide = false
+	spellEffect.Anchored = true
+	spellEffect.CFrame = CFrame.new(wand.CFrame*CFrame.new(0,0,1).p,hit.p)
+	spellEffect.Parent=char
+	local light = Instance.new('PointLight',spellEffect)
+	light.Color = BrickColor.new(color).Color
+	light.Brightness = 3
+	light.Range = 6
+	if spellname == 'confringo' then
+		Instance.new('Fire',spellEffect)
+	end
+	spawn(function()
+		local lastpos = nil
+		local follow = false
+		while hitpart == nil do
+			follow = not follow
+			local pos1 = wand.CFrame*CFrame.new(0,0,1)
+			if lastpos then
+				pos1 = lastpos
+			end
+			game:service'RunService'.RenderStepped:wait()
+			local pos2 = spellCore.CFrame*CFrame.new(0,0,1)
+			if not follow then
+				local min,max = -.5,.5
+				if spread then
+					min,max=-spread,spread
+				end
+				local n1 = min+(math.random()*(max-min))
+				local n2 = min+(math.random()*(max-min))
+				--local n3 = min+(math.random()*(max-min))
+				pos2 = spellCore.CFrame * CFrame.new(n1,n2,0)
+			else
+				game:service'RunService'.RenderStepped:wait()
+			end
+			lastpos = pos2
+			connectPoints(spellEffect,spellCore,pos1,pos2,color)
+		end
+	end)
+	while hitpart == nil do
+		spellCore.CFrame = spellCore.CFrame * CFrame.new(0,0,-speed)
+		game:service'RunService'.RenderStepped:wait()
+	end
+	spawn(function()
+		local particle = Instance.new('ParticleEmitter',hitpart)
+		particle.LightEmission = 1
+		particle.LightInfluence = 0
+		particle.Size = NumberSequence.new(.1)
+		particle.Texture = 'rbxassetid://134342987'
+		particle.Color = ColorSequence.new(BrickColor.new(color).Color)
+		--particle.LockedToPart = true
+		particle.EmissionDirection = 'Front'
+		particle.Lifetime = NumberRange.new(2)
+		particle.Rate = 500
+		particle.SpreadAngle = Vector2.new(90,90)
+		wait(.2)
+		spellEffect:Destroy()
+		wait(.2)
+		particle.Enabled = false
+	end)
+	return hitpart,spellCore.CFrame or nil,spellCore.CFrame
+end
+--//Created by WaverlyCole
+spellname = ''
+spellpower = 0
+player.Chatted:connect(function(msg)
+	local args = Split(msg,' ')
+	spellname = args[1]
+	spellpower = 1
+	if args[2] == 'maxima' then
+		spellpower = 2
+	end
+end)
+mouse.Button1Down:connect(function()
+	if spellname == 'bombarda' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Persimmon',sound1,2)
+		local explosion = Instance.new('Explosion')
+		explosion.Position = endcframe.p
+		explosion.BlastRadius = 4
+		if spellpower == 2 then
+			explosion.BlastRadius = 20
+		end
+		explosion.Parent=workspace
+		spellpower = 0
+	elseif spellname == 'nako' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Brick yellow',sound1)
+		local human = getChar(hit)
+		if human then
+			pcall(function()
+				human:FindFirstChild('Pants'):Destroy()
+				human:FindFirstChild('Shirt'):Destroy()
+			end)
+		end
+		spellpower = 0
+	elseif spellname == 'confringo' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Bright red',sound1)
+		local human = getChar(hit)
+		if human then
+			pcall(function()
+				Instance.new('Fire',human.Head)
+				while wait(.01) do
+					human.Humanoid.Health = human.Humanoid.Health - 1
+					if spellpower == 2 then
+						human.Humanoid.Health = human.Humanoid.Health - 1
+					end
+				end
+			end)
+		end
+		spellpower = 0
+	elseif spellname == 'impedimenta' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Salmon',sound1)
+		local human = getChar(hit)
+		if human then
+			for i = 1,500 do
+			human.Humanoid.PlatformStand = true
+			human.Humanoid.JumpPower = 0
+			wait()
+			end
+		end
+		spellpower = 0
+	elseif spellname == 'episky' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Lime green',sound1)
+		local human = getChar(hit)
+		if human then
+			pcall(function()
+				if spellpower == 2 then
+					human.Humanoid.Health = human.Humanoid.MaxHealth
+				else
+					for i = 1,50 do
+						wait()
+						human.Humanoid.Health = human.Humanoid.Health + 1
+					end
+				end
+			end)
+		end
+		spellpower = 0
+	elseif spellname == 'accio' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local speed = 3
+		if spellpower == 2 then
+			speed = 15
+		end
+		local hit,endcframe = createSpell(speed,'Lapis',sound1)
+		if hit.Name == 'Base' then return end
+		hit.Anchored = true
+		repeat
+			hit.CFrame = CFrame.new(hit.CFrame.p,wand.CFrame.p) * CFrame.new(0,0,-1)
+			wait()
+		until (hit.CFrame.p - wand.CFrame.p).magnitude < 10
+		hit.Anchored = false
+		spellpower = 0
+	elseif spellname == 'colloshoo' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'White',sound1)
+		local human = getChar(hit)
+		if human then
+			pcall(function()
+				human['Left Leg'].Anchored = true
+				human['Right Leg'].Anchored = true
+			end)
+		end
+		spellpower = 0
+	elseif spellname == 'deletrius' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local speed = 5
+		if spellpower == 2 then
+			speed = 6
+		end
+		local hit,endcframe = createSpell(speed,'Really red',sound1)
+		if hit.Name ~= 'Base' then hit:Destroy() end
+		spellpower = 0
+	elseif spellname == 'stupefy' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local speed = 5
+		if spellpower == 2 then
+			speed = 6
+		end
+		local hit,endcframe = createSpell(speed,'Really red',sound1)
+		local human = getChar(hit)
+		if human then
+			human.Humanoid.Health = human.Humanoid.Health - 20
+			human.Humanoid.PlatformStand = true
+			local force = Instance.new('BodyForce',human.HumanoidRootPart)
+			local power = 3000 * spellpower
+			force.Force = CFrame.new(wand.CFrame.p,hit.CFrame.p).lookVector *power + Vector3.new(0,4000 + 500*spellpower,0)
+			wait(.5)
+			force:Destroy()
+			wait(3)
+			hit.Parent.Humanoid.PlatformStand = false
+		end
+		spellpower = 0
+	elseif spellname == 'expelliarmus' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(5,'Really red',sound1)
+		local human = getChar(hit)
+		if human then
+			pcall(function()
+			for i,v in pairs(human:children()) do
+				if v.ClassName == 'Tool' or v.ClassName == 'Hopperbin' then
+					v.Parent=workspace
+					if v.Handle then
+						local force = Instance.new('BodyForce',v.Handle)
+						force.Force = CFrame.new(v.Handle.CFrame.p,char.Torso.CFrame.p).lookVector*500
+						wait(.1)
+						force:Destroy()
+					end
+				end
+			end
+			end)
+		end
+		spellpower = 0
+	elseif spellname == 'calvario' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Light red',sound1)
+		local human = getChar(hit)
+		if human then
+			pcall(function()
+				for i,v in pairs(human:children()) do
+					if v.ClassName == "Accessory" then
+						v.Handle.Name = 'rekt'
+						v.Parent=workspace
+					end
+				end
+			end)
+		end
+		spellpower = 0
+	elseif spellname == 'aguamente' then
+		spellname = ''
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'Medium blue',sound1)
+		if spellpower == 1 then
+			workspace.Terrain:FillBlock(endcframe,Vector3.new(4,2,4),'Water')
+		else
+			workspace.Terrain:FillBlock(endcframe,Vector3.new(15,3,15),'Water')
+		end	
+		spellpower = 0
+	elseif spellname == 'testspell' then
+		spellAnimation()
+		wait(.2)
+		local hit,endcframe = createSpell(3,'White',sound1)
+		--spellname,spellpower = '',0
+	end
+end)
+--//Created by WaverlyCole
+mouse.KeyDown:connect(keyDown)
