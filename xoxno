@@ -1,0 +1,509 @@
+--Created with ttyyuu12345's compiler
+--ttyyuu12345 is not responsible for damages caused to your game
+--This plugin does not remove things
+--ttyyuu12345 cannot be held resonsible for manual deletion for the purpose of testing
+--Keep in mind, any items that cause errors in compilation will be skipped and documented within the last line of the disclaimer comments
+--Thank you for using my plugin and enjoy :)
+--It is free to use, however I do accept donations
+--Errors: TouchTransmitter
+Create = function(itemClass,tabl)
+local item = Instance.new(itemClass)
+for i,v in pairs(tabl) do
+local a,b = ypcall(function() return item[i] end)
+if a then
+item[i] = tabl[i]
+end
+end
+return item
+end
+function runDummyScript(f,scri)
+local oldenv = getfenv(f)
+local newenv = setmetatable({}, {
+__index = function(_, k)
+if k:lower() == 'script' then
+return scri
+else
+return oldenv[k]
+end
+end
+})
+setfenv(f, newenv)
+ypcall(function() f() end)
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting")) 
+mas.Name = "CompiledModel"
+o1 = Create("Tool",{
+["Name"] = "Ice Ray",
+["Parent"] = mas,
+["TextureId"] = "http://www.roblox.com/asset/?id=24666028",
+})
+o2 = Create("Part",{
+["Name"] = "Handle",
+["Parent"] = o1,
+["BrickColor"] = BrickColor.new("Black"),
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.105882, 0.164706, 0.207843),
+})
+o3 = Create("BlockMesh",{
+["Parent"] = o2,
+["Offset"] = Vector3.new(0.100000001, 0, 0.75),
+["Scale"] = Vector3.new(0.75, 0.5, 0.5),
+})
+o4 = Create("Sound",{
+["Name"] = "Fail",
+["Parent"] = o2,
+["Volume"] = 1,
+})
+o6 = Create("Part",{
+["Name"] = "Part1",
+["Parent"] = o1,
+["Material"] = Enum.Material.Ice,
+["BrickColor"] = BrickColor.new("Cyan"),
+["Transparency"] = 0.5,
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["CanCollide"] = false,
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.0156863, 0.686275, 0.92549),
+})
+o7 = Create("BlockMesh",{
+["Parent"] = o6,
+["Offset"] = Vector3.new(0, 0, -0.800000012),
+["Scale"] = Vector3.new(0.400000006, 0.400000006, 0.400000006),
+})
+o8 = Create("Weld",{
+["Parent"] = o6,
+})
+o9 = Create("Weld",{
+["Parent"] = o6,
+})
+o10 = Create("Weld",{
+["Parent"] = o6,
+["Part0"] = o6,
+["Part1"] = o2,
+})
+o11 = Create("Part",{
+["Name"] = "Part2",
+["Parent"] = o1,
+["Material"] = Enum.Material.Ice,
+["BrickColor"] = BrickColor.new("Medium blue"),
+["Transparency"] = 0.20000000298023,
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["CanCollide"] = false,
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.431373, 0.6, 0.792157),
+})
+o12 = Create("BlockMesh",{
+["Parent"] = o11,
+["Offset"] = Vector3.new(0, 0, -0.800000012),
+["Scale"] = Vector3.new(0.200000003, 0.200000003, 0.400000006),
+})
+o13 = Create("Weld",{
+["Parent"] = o11,
+})
+o14 = Create("Weld",{
+["Parent"] = o11,
+})
+o15 = Create("Weld",{
+["Parent"] = o11,
+["Part0"] = o11,
+["Part1"] = o2,
+})
+o16 = Create("Part",{
+["Name"] = "Part3",
+["Parent"] = o1,
+["Material"] = Enum.Material.Ice,
+["BrickColor"] = BrickColor.new("Pastel blue-green"),
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["CanCollide"] = false,
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.623529, 0.952941, 0.913726),
+})
+o17 = Create("BlockMesh",{
+["Parent"] = o16,
+["Offset"] = Vector3.new(0, 0, -1.60000002),
+["Scale"] = Vector3.new(0.439999998, 0.439999998, 0.0399999991),
+})
+o18 = Create("Weld",{
+["Parent"] = o16,
+})
+o19 = Create("Weld",{
+["Parent"] = o16,
+})
+o20 = Create("Weld",{
+["Parent"] = o16,
+["Part0"] = o16,
+["Part1"] = o2,
+})
+o21 = Create("Part",{
+["Name"] = "Part4",
+["Parent"] = o1,
+["Material"] = Enum.Material.Ice,
+["BrickColor"] = BrickColor.new("Pastel light blue"),
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["CanCollide"] = false,
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.686275, 0.866667, 1),
+})
+o22 = Create("BlockMesh",{
+["Parent"] = o21,
+["Offset"] = Vector3.new(0.400000006, 0, -0.800000012),
+["Scale"] = Vector3.new(0.0399999991, 0.0399999991, 0.400000006),
+})
+o23 = Create("Weld",{
+["Parent"] = o21,
+})
+o24 = Create("Weld",{
+["Parent"] = o21,
+})
+o25 = Create("Weld",{
+["Parent"] = o21,
+["Part0"] = o21,
+["Part1"] = o2,
+})
+o26 = Create("Part",{
+["Name"] = "Part5",
+["Parent"] = o1,
+["Material"] = Enum.Material.Ice,
+["BrickColor"] = BrickColor.new("Cyan"),
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["CanCollide"] = false,
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.0156863, 0.686275, 0.92549),
+})
+o27 = Create("BlockMesh",{
+["Parent"] = o26,
+["Offset"] = Vector3.new(0.200000003, 0, -1.60000002),
+["Scale"] = Vector3.new(0.400000006, 0.0399999991, 0.0199999996),
+})
+o28 = Create("Weld",{
+["Parent"] = o26,
+})
+o29 = Create("Weld",{
+["Parent"] = o26,
+})
+o30 = Create("Weld",{
+["Parent"] = o26,
+["Part0"] = o26,
+["Part1"] = o2,
+})
+o31 = Create("Part",{
+["Name"] = "Part6",
+["Parent"] = o1,
+["Material"] = Enum.Material.Ice,
+["BrickColor"] = BrickColor.new("Bright blue"),
+["Position"] = Vector3.new(-6, 0.600004971, -12.5),
+["Rotation"] = Vector3.new(-0, 90, 0),
+["CFrame"] = CFrame.new(-6, 0.600004971, -12.5, -0, 0, 1, -0, 1, 0, -1, 0, 0),
+["CanCollide"] = false,
+["Size"] = Vector3.new(1, 1.20000005, 4),
+["Color"] = Color3.new(0.0509804, 0.411765, 0.67451),
+})
+o32 = Create("BlockMesh",{
+["Parent"] = o31,
+["Offset"] = Vector3.new(0, 0, -2),
+["Scale"] = Vector3.new(0.0799999982, 0.0799999982, 0.200000003),
+})
+o33 = Create("Weld",{
+["Parent"] = o31,
+})
+o34 = Create("Weld",{
+["Parent"] = o31,
+})
+o35 = Create("Weld",{
+["Parent"] = o31,
+["Part0"] = o31,
+["Part1"] = o2,
+})
+o36 = Create("BoolValue",{
+["Name"] = "Fire",
+["Parent"] = o1,
+})
+o37 = Create("Script",{
+["Name"] = "LaserFireAnimation",
+["Parent"] = o1,
+})
+table.insert(cors,coroutine.create(function()
+wait()
+runDummyScript(function()
+laser = script.Parent
+while true do
+	if (script.Parent.Fire.Value) then
+		for a = 1, 2 do
+			laser.Part1.Mesh.Offset = laser.Part1.Mesh.Offset + Vector3.new(0,0,0.2)
+			laser.Part2.Mesh.Offset = laser.Part2.Mesh.Offset + Vector3.new(0,0,0.2)
+			laser.Part3.Mesh.Offset = laser.Part3.Mesh.Offset + Vector3.new(0,0,0.2)
+			laser.Part4.Mesh.Offset = laser.Part4.Mesh.Offset + Vector3.new(0,0,0.2)
+			laser.Part5.Mesh.Offset = laser.Part5.Mesh.Offset + Vector3.new(0,0,0.2)
+			laser.Part6.Mesh.Offset = laser.Part6.Mesh.Offset + Vector3.new(0,0,0.2)
+			wait()
+		end
+		for a = 1, 2 do
+			laser.Part1.Mesh.Offset = laser.Part1.Mesh.Offset - Vector3.new(0,0,0.2)
+			laser.Part2.Mesh.Offset = laser.Part2.Mesh.Offset - Vector3.new(0,0,0.2)
+			laser.Part3.Mesh.Offset = laser.Part3.Mesh.Offset - Vector3.new(0,0,0.2)
+			laser.Part4.Mesh.Offset = laser.Part4.Mesh.Offset - Vector3.new(0,0,0.2)
+			laser.Part5.Mesh.Offset = laser.Part5.Mesh.Offset - Vector3.new(0,0,0.2)
+			laser.Part6.Mesh.Offset = laser.Part6.Mesh.Offset - Vector3.new(0,0,0.2)
+			wait()
+		end
+		script.Parent.Fire.Value = false
+	end
+	wait()
+end
+		
+end,o37)
+end))
+o38 = Create("Script",{
+["Name"] = "WeldScript",
+["Parent"] = o1,
+})
+table.insert(cors,coroutine.create(function()
+wait()
+runDummyScript(function()
+t = script.Parent
+
+function stick(x, y)
+	weld = Instance.new("Weld") 
+	weld.Part0 = x
+	weld.Part1 = y
+	local HitPos = x.Position
+	local CJ = CFrame.new(HitPos) 
+	local C0 = x.CFrame:inverse() *CJ 
+	local C1 = y.CFrame:inverse() * CJ 
+	weld.C0 = C0 
+	weld.C1 = C1 
+	weld.Parent = x
+end
+
+function Weldnow()
+	c = t:children()
+	for n = 1, #c do
+		if (c[n].className == "Part") then
+			if (c[n].Name ~= "Handle") then
+				c[n].CFrame = t.Handle.CFrame
+				stick(c[n], t.Handle)
+			end
+		end
+	end
+end
+
+script.Parent.Equipped:connect(Weldnow)
+script.Parent.Unequipped:connect(Weldnow)
+Weldnow()
+end,o38)
+end))
+o39 = Create("LocalScript",{
+["Name"] = "Local Gui",
+["Parent"] = o1,
+})
+table.insert(cors,coroutine.create(function()
+wait()
+runDummyScript(function()
+local Tool = script.Parent;
+debris = game:GetService("Debris")
+
+colors = {BrickColor.new("Medium Blue"), BrickColor.new("Pastel light blue"), BrickColor.new("Light blue"), BrickColor.new("Cyan"), BrickColor.new("Pastel blue")}
+
+function stick(x, y)
+	weld = Instance.new("Weld") 
+	weld.Part0 = x
+	weld.Part1 = y
+	local HitPos = x.Position
+	local CJ = CFrame.new(HitPos) 
+	local C0 = x.CFrame:inverse() *CJ 
+	local C1 = y.CFrame:inverse() * CJ 
+	weld.C0 = C0 
+	weld.C1 = C1 
+	weld.Parent = x
+end
+
+enabled = true
+
+function onButton1Down(mouse)
+	if (not enabled) then return end
+	enabled = false
+	script.Parent.Fire.Value = true
+	targ = mouse.Target
+	if (targ == nil) then 
+		script.Parent.Handle.Fail:play()
+		enabled = true
+		return 
+	end
+	hum = targ.Parent:findFirstChild("Humanoid") or targ.Parent:findFirstChild("Zombie") or targ.Parent:findFirstChild("Alien")
+	if (hum ~= nil) then
+		script.Parent.Handle.Fail:play()
+                m = Instance.new("Model")
+                m.Name = targ.Parent.Name
+                m.Parent = Workspace
+                h = Instance.new("Humanoid")
+                h.MaxHealth = 0
+                h.Health = 0
+                h.Name = "ICE"
+                h.Parent = m
+		c = Instance.new("ObjectValue")
+		c.Name = "creator"
+		c.Value = game.Players:findFirstChild(script.Parent.Parent.Name)
+		c.Parent = hum
+                k = hum.Parent:GetChildren()
+                for i =1,#k do
+                if (k[i].className == "Part") and (k[i].Name ~= "Head") then
+                k[i].Anchored = true
+	        k[i].BrickColor = colors[math.random(1, #colors)]
+	        k[i].Friction = .01
+	        if ( math.random() > .5) then
+		k[i].Material = Enum.Material.Ice
+	        else
+		k[i].Transparency = .1 + (math.random(1,4) / 10)
+	        end
+                k[i].TopSurface = 0
+                k[i].BottomSurface = 0
+                k[i].Parent = m
+                end end
+
+                t = hum.Parent:GetChildren()
+                for l = 1,#t do
+                if (t[l].className == "Tool") then
+                j = t[l]:GetChildren()
+                for y = 1,#j do
+                if (j[y].className == "Part") then
+                j[y].Anchored = true
+	        j[y].BrickColor = colors[math.random(1, #colors)]
+	        j[y].Friction = .01
+	        if ( math.random() > .5) then
+		j[y].Material = Enum.Material.Ice
+	        else
+		j[y].Transparency = .1 + (math.random(1,4) / 10)
+	        end
+                j[y].TopSurface = 0
+                j[y].BottomSurface = 0
+                j[y].Parent = m
+                end end end end
+
+                q = hum.Parent:GetChildren()
+                for w = 1,#q do
+                if (q[w].className == "Hat") then
+                e = q[w]:GetChildren()
+                for a = 1,#e do
+                if (e[a].className == "Part") then
+                e[a].Anchored = true
+	        e[a].BrickColor = colors[math.random(1, #colors)]
+	        e[a].Friction = .01
+		e[a].Material = Enum.Material.Ice
+                e[a].TopSurface = 0
+                e[a].BottomSurface = 0
+                e[a].Parent = m
+                e[a].CFrame = CFrame.new(hum.Parent.Head.Position) + Vector3.new(0, 0.75, 0)
+                end end end end
+
+                z = hum.Parent:GetChildren()
+                for b = 1,#z do
+                if (z[b].Name == "Head") then
+                z[b].Anchored = true
+	        z[b].BrickColor = colors[math.random(1, #colors)]
+	        z[b].Friction = .01
+	        if ( math.random() > .5) then
+		z[b].Material = Enum.Material.Ice
+	        else
+		z[b].Transparency = .1 + (math.random(1,4) / 10)
+	        end
+                z[b].TopSurface = 0
+                z[b].BottomSurface = 0
+                z[b].Parent = m
+
+                end end
+                brick = script.Parent.BrickCleanUp:clone()
+                brick.Disabled = false
+                brick.Parent = m
+		debris:AddItem(m, 90)
+	end
+	if (hum == nil) then
+		script.Parent.Handle.Fail:play()
+	end
+	Hit = mouse.hit
+	local P = Instance.new("Part") 
+	P.Name = "BulletTrail" 
+	local Place0 = script.Parent.Parent["Right Arm"].CFrame 
+	P.formFactor = 0 
+	P.Size = Vector3.new(1,1,(Place0.p - Hit.p).magnitude) 
+	P.CFrame = CFrame.new((Place0.p + Hit.p)/2,Place0.p) 
+	P.Parent = script.Parent.Parent
+	P.BrickColor = script.Parent.Part1.BrickColor
+	P.Anchored = true 
+	P.CanCollide = false
+	m = Instance.new("BlockMesh")
+	m.Scale = Vector3.new(0.1,0.1,1)
+	m.Parent = P
+	for count = 1, 5 do
+		P.Transparency = count/5
+		wait()
+	end
+	P:remove()
+	enabled = true
+end
+
+
+
+function onEquippedLocal(mouse)
+
+
+
+	if mouse == nil then
+
+		print("Mouse not found")
+
+		return 
+
+	end
+
+
+
+	mouse.Icon = "rbxasset://textures\\GunCursor.png"
+
+	mouse.Button1Down:connect(function() onButton1Down(mouse) end)
+end
+
+
+
+
+
+Tool.Equipped:connect(onEquippedLocal)
+
+end,o39)
+end))
+o40 = Create("Script",{
+["Name"] = "BrickCleanUp",
+["Parent"] = o1,
+["Disabled"] = true,
+})
+table.insert(cors,coroutine.create(function()
+wait()
+runDummyScript(function()
+wait(90)
+script.Parent:Remove()
+end,o40)
+end))
+mas.Parent = workspace
+mas:MakeJoints()
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+	mas1[i].Parent = game.Players.LocalPlayer.Character 
+	ypcall(function() mas1[i]:MakeJoints() end)
+end
+mas:Destroy()
+for i=1,#cors do
+coroutine.resume(cors[i])
+end
