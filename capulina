@@ -1,0 +1,108 @@
+wait()
+--script.Parent=nil
+
+Parts = {}
+player = game.Players.LocalPlayer
+local color = BrickColor.new("Black")
+local Direction = 1
+
+function Split(inputstr,sep)
+	local t,i = {},1
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+		t[i] = str
+		i = i + 1
+	end
+	return t
+end
+
+	for i=1,100 do
+	local p = Instance.new("Part")
+	p.Size = Vector3.new(.2,.1,.1)
+	p.Material = "Neon"
+	p.Anchored = true
+	p.CanCollide = false
+	p.BrickColor = color
+	local m = Instance.new("BlockMesh")
+	m.Scale = Vector3.new(1,1,1)
+	m.Name = "Mesh"
+	p.Parent = player.Character.Head
+	m.Parent = p
+	p.CFrame = player.Character.HumanoidRootPart.CFrame
+	table.insert(Parts,p)
+	end
+	
+	local sound = Instance.new("Sound",game.Players.LocalPlayer.Character.HumanoidRootPart)
+	sound.SoundId = "http://www.roblox.com/asset?id=858240274"
+	sound.Volume = 2
+	sound:Play()
+
+game:GetService'RunService'.RenderStepped:connect(function()
+	local torp = player.Character.HumanoidRootPart.Position
+	local circumference = .5*#Parts
+	local answer = circumference/(math.pi*2)
+	for i,v in pairs(Parts) do
+		v.CFrame = v.CFrame:lerp(CFrame.new(torp.X, torp.Y-3, torp.Z) * CFrame.Angles(0, math.rad(i*(360/#Parts)), 0) * CFrame.new(0, 0, answer), .2)
+		v.Mesh.Scale = v.Mesh.Scale:lerp(Vector3.new(1,sound.PlaybackLoudness/25,1),.01)
+	end
+end)
+spawn(function()
+	while wait(5) do
+		color = BrickColor.Random()
+	end
+end)
+spawn(function()
+	local SelectedPart = 0
+	while true do
+		if Direction == 1 then
+			if SelectedPart < #Parts then
+				SelectedPart = SelectedPart + Direction
+			else
+				SelectedPart = 1
+			end
+		elseif Direction == -1 then
+			if SelectedPart > 1 then
+				SelectedPart = SelectedPart + Direction
+			else
+				SelectedPart = #Parts
+			end
+		end
+		print(SelectedPart.." : "..Direction)
+		local sel = Parts[SelectedPart]
+		sel.BrickColor = BrickColor.White()
+		sel.Mesh.Scale = sel.Mesh.Scale:lerp(Vector3.new(1,sound.PlaybackLoudness/10,1),.8)
+		if sound.PlaybackLoudness/120 > 4 then
+			Direction = -(Direction)
+		end
+		wait()
+		sel.BrickColor = color
+	end
+end)
+player.Chatted:connect(function(m)
+	local c = Split(m," ")
+	if c[1] == "add" then
+		for i=1,tonumber(c[2]) do
+				local p = Instance.new("Part")
+				p.Size = Vector3.new(.2,.1,.1)
+				p.Material = "Neon"
+				p.Anchored = true
+				p.CanCollide = false
+				p.BrickColor = BrickColor.new("Black")
+				local m = Instance.new("BlockMesh")
+				m.Scale = Vector3.new(1,1,1)
+				p.Parent = player.Character.Head
+				m.Parent = p
+				p.CFrame = player.Character.HumanoidRootPart.CFrame
+				table.insert(Parts,p)
+		end
+	elseif c[1] == "rmv" then
+		for i=1,tonumber(c[2]) do
+			local Part = Parts[#Parts]
+			Part:Destroy()
+			table.remove(Parts,#Parts)
+		end
+	elseif c[1] == "play" then
+		sound:Stop()
+		sound.SoundId = "http://www.roblox.com/asset?id="..tonumber(c[2])
+		sound:Play()
+	end
+end)
