@@ -1,0 +1,71 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--// Bacon GUI Script (Updated Decal ID)
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+
+ScreenGui.Name = "BaconGUI"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+Frame.Name = "Main"
+Frame.Size = UDim2.new(0, 200, 0, 160)
+Frame.Position = UDim2.new(0, 20, 0.5, -80)
+Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame.BorderSizePixel = 2
+Frame.Parent = ScreenGui
+
+-- Button creator
+local function makeButton(text, posY)
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.new(0, 180, 0, 40)
+	button.Position = UDim2.new(0, 10, 0, posY)
+	button.BackgroundColor3 = Color3.fromRGB(255, 200, 200)
+	button.Font = Enum.Font.SourceSansBold
+	button.TextColor3 = Color3.new(0, 0, 0)
+	button.TextScaled = true
+	button.Text = text
+	button.Parent = Frame
+	return button
+end
+
+-- Updated Image ID
+local imageID = "rbxassetid://125193895482963"
+
+-- Skybox Button
+local SkyboxBtn = makeButton("Skybox", 10)
+SkyboxBtn.MouseButton1Click:Connect(function()
+	local lighting = game:GetService("Lighting")
+	local sky = Instance.new("Sky", lighting)
+	sky.SkyboxBk = imageID
+	sky.SkyboxDn = imageID
+	sky.SkyboxFt = imageID
+	sky.SkyboxLf = imageID
+	sky.SkyboxRt = imageID
+	sky.SkyboxUp = imageID
+end)
+
+-- Decal Spam Button
+local DecalBtn = makeButton("Decal Spam", 60)
+DecalBtn.MouseButton1Click:Connect(function()
+	for _, part in ipairs(workspace:GetDescendants()) do
+		if part:IsA("BasePart") then
+			for _, face in ipairs(Enum.NormalId:GetEnumItems()) do
+				local decal = Instance.new("Decal")
+				decal.Texture = imageID
+				decal.Face = face
+				decal.Parent = part
+			end
+		end
+	end
+end)
+
+-- Unanchor All Button
+local UnanchorBtn = makeButton("Unanchor All", 110)
+UnanchorBtn.MouseButton1Click:Connect(function()
+	for _, part in ipairs(workspace:GetDescendants()) do
+		if part:IsA("BasePart") then
+			part.Anchored = false
+		end
+	end
+end)
